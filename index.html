@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus AI | Image & Video Generation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <i class="fas fa-robot"></i>
+                    <span>Nexus AI</span>
+                </div>
+                <div class="nav-links">
+                    <a href="#" class="nav-link active">Generate</a>
+                    <a href="#" class="nav-link">Gallery</a>
+                    <a href="#" class="nav-link">Pricing</a>
+                    <a href="#" class="nav-link">Docs</a>
+                    <div class="auth-buttons">
+                        <button class="btn btn-outline" id="loginBtn">Login</button>
+                        <button class="btn btn-primary" id="registerBtn">Sign Up</button>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Transform Your Ideas Into Stunning Visuals</h1>
+            <p>Nexus AI uses cutting-edge artificial intelligence to generate high-quality images and videos from text descriptions. Perfect for content creators, designers, and marketing agencies.</p>
+            <div class="auth-buttons">
+                <button class="btn btn-primary" id="heroTryBtn">Try It Free</button>
+                <button class="btn btn-outline">View Examples</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        <div class="content-wrapper">
+            <!-- Left Panel: Prompt Input & Results -->
+            <div class="left-panel">
+                <!-- Prompt Input -->
+                <section class="prompt-section fade-in">
+                    <h2 class="section-title">
+                        <i class="fas fa-keyboard"></i>
+                        <span>Describe Your Vision</span>
+                    </h2>
+                    <textarea class="prompt-input" id="promptInput" placeholder="Enter a detailed description of the image or video you want to generate. Be as specific as possible for the best results...">A majestic eagle soaring over a futuristic city at sunset, cinematic lighting, hyper-realistic, 8K resolution</textarea>
+                    <div class="prompt-actions">
+                        <div class="char-count">
+                            <i class="fas fa-text-height"></i>
+                            <span id="charCount">98 characters</span>
+                        </div>
+                        <div>
+                            <i class="fas fa-lightbulb"></i>
+                            <span>Tip: Include details like style, mood, and composition</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Results Section -->
+                <section class="results-section fade-in">
+                    <h2 class="section-title">
+                        <i class="fas fa-images"></i>
+                        <span>Generated Result</span>
+                    </h2>
+                    <div id="resultContainer">
+                        <div class="result-placeholder" id="resultPlaceholder">
+                            <i class="fas fa-image"></i>
+                            <p>Your generated image or video will appear here</p>
+                            <p>Click "Generate" to create your first AI artwork</p>
+                        </div>
+                        <img src="" alt="Generated Image" class="result-image" id="resultImage">
+                    </div>
+                    <div class="result-actions">
+                        <button class="download-btn" id="downloadBtn">
+                            <i class="fas fa-download"></i>
+                            <span>Download HD</span>
+                        </button>
+                        <button class="download-btn">
+                            <i class="fas fa-share"></i>
+                            <span>Share</span>
+                        </button>
+                        <button class="download-btn">
+                            <i class="fas fa-sync-alt"></i>
+                            <span>Regenerate</span>
+                        </button>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Right Panel: Options -->
+            <div class="right-panel">
+                <!-- Options Panel -->
+                <section class="options-panel fade-in">
+                    <!-- Generate Type -->
+                    <div class="option-group">
+                        <h3 class="option-title">
+                            <i class="fas fa-cube"></i>
+                            <span>Generate Type</span>
+                        </h3>
+                        <div class="option-buttons">
+                            <button class="option-btn active" data-type="image">
+                                <i class="fas fa-image"></i>
+                                <span>Image</span>
+                            </button>
+                            <button class="option-btn" data-type="video">
+                                <i class="fas fa-video"></i>
+                                <span>Video</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Style Selection -->
+                    <div class="option-group">
+                        <h3 class="option-title">
+                            <i class="fas fa-palette"></i>
+                            <span>Style</span>
+                        </h3>
+                        <div class="option-buttons">
+                            <button class="option-btn active" data-style="realistic">Realistic</button>
+                            <button class="option-btn" data-style="cartoon">Cartoon</button>
+                            <button class="option-btn" data-style="cinematic">Cinematic</button>
+                            <button class="option-btn" data-style="gulf">Gulf Style</button>
+                            <button class="option-btn" data-style="artistic">Artistic</button>
+                        </div>
+                    </div>
+
+                    <!-- Aspect Ratio -->
+                    <div class="option-group">
+                        <h3 class="option-title">
+                            <i class="fas fa-expand-alt"></i>
+                            <span>Aspect Ratio</span>
+                        </h3>
+                        <div class="aspect-ratios">
+                            <div class="aspect-ratio active" data-ratio="1:1">
+                                <div class="aspect-icon">
+                                    <i class="fas fa-square"></i>
+                                </div>
+                                <span>Square (1:1)</span>
+                            </div>
+                            <div class="aspect-ratio" data-ratio="16:9">
+                                <div class="aspect-icon">
+                                    <i class="fas fa-desktop"></i>
+                                </div>
+                                <span>Widescreen (16:9)</span>
+                            </div>
+                            <div class="aspect-ratio" data-ratio="4:3">
+                                <div class="aspect-icon">
+                                    <i class="fas fa-tablet-alt"></i>
+                                </div>
+                                <span>Standard (4:3)</span>
+                            </div>
+                            <div class="aspect-ratio" data-ratio="9:16">
+                                <div class="aspect-icon">
+                                    <i class="fas fa-mobile-alt"></i>
+                                </div>
+                                <span>Vertical (9:16)</span>
+                            </div>
+                            <div class="aspect-ratio" data-ratio="3:2">
+                                <div class="aspect-icon">
+                                    <i class="fas fa-camera"></i>
+                                </div>
+                                <span>Photo (3:2)</span>
+                            </div>
+                            <div class="aspect-ratio" data-ratio="21:9">
+                                <div class="aspect-icon">
+                                    <i class="fas fa-film"></i>
+                                </div>
+                                <span>Cinematic (21:9)</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Advanced Options (Collapsed by default) -->
+                <section class="options-panel fade-in">
+                    <h3 class="option-title">
+                        <i class="fas fa-sliders-h"></i>
+                        <span>Advanced Options</span>
+                    </h3>
+                    <div class="option-buttons">
+                        <button class="option-btn">
+                            <i class="fas fa-seedling"></i>
+                            <span>Seed Control</span>
+                        </button>
+                        <button class="option-btn">
+                            <i class="fas fa-adjust"></i>
+                            <span>Guidance Scale</span>
+                        </button>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- Generate Button -->
+        <div class="generate-btn-container">
+            <button class="generate-btn" id="generateBtn">
+                <i class="fas fa-magic"></i>
+                <span>Generate AI Content</span>
+                <div class="loading" id="loadingIndicator">
+                    <div class="spinner"></div>
+                    <span>Processing...</span>
+                </div>
+            </button>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">Nexus AI</div>
+                <div class="footer-links">
+                    <a href="#" class="footer-link">Terms of Service</a>
+                    <a href="#" class="footer-link">Privacy Policy</a>
+                    <a href="#" class="footer-link">Contact</a>
+                    <a href="#" class="footer-link">Careers</a>
+                </div>
+                <div class="copyright">
+                    &copy; 2023 Nexus AI. All rights reserved. Powered by cutting-edge AI technology.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Sign In to Nexus AI</h2>
+                <button class="close-modal" id="closeLoginModal">&times;</button>
+            </div>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail" class="form-label">Email Address</label>
+                    <input type="email" id="loginEmail" class="form-input" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword" class="form-label">Password</label>
+                    <input type="password" id="loginPassword" class="form-input" placeholder="Enter your password" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%; padding: 1rem;">Sign In</button>
+            </form>
+            <div class="form-footer">
+                <p>Don't have an account? <a class="form-link" id="switchToRegister">Sign up here</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div class="modal" id="registerModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Create Account</h2>
+                <button class="close-modal" id="closeRegisterModal">&times;</button>
+            </div>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="registerName" class="form-label">Full Name</label>
+                    <input type="text" id="registerName" class="form-input" placeholder="Enter your full name" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerEmail" class="form-label">Email Address</label>
+                    <input type="email" id="registerEmail" class="form-input" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerPassword" class="form-label">Password</label>
+                    <input type="password" id="registerPassword" class="form-input" placeholder="Create a password" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerConfirmPassword" class="form-label">Confirm Password</label>
+                    <input type="password" id="registerConfirmPassword" class="form-input" placeholder="Confirm your password" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%; padding: 1rem;">Create Account</button>
+            </form>
+            <div class="form-footer">
+                <p>Already have an account? <a class="form-link" id="switchToLogin">Sign in here</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
